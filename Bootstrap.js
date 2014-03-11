@@ -27,8 +27,8 @@
 			var complete = function() {
 				if (--iterations > 0)
 					return;
-
-				//self.require(self.scope.appPath + 'app.js');
+				
+				self.require('app');
 			};
 
 			for (var i in vendors)
@@ -53,14 +53,15 @@
 			if (typeof url == 'undefined')
 				return;
 
-			if (!url.match(/^.*\.js/))
-				url = self.scope.appPath + url + '.js';
-
 			if ((mod = findModule(url)) != null) {
 				d.resolve(mod.module);
 				if (typeof callback == 'function')
 					callback(mod.module);
+				return;
 			}
+
+			if (!url.match(/^.*\.js/))
+				url = self.scope.appPath + url + '.js';
 
 			script = document.createElement('script');
 			script.setAttribute('src', url);
