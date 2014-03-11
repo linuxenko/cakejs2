@@ -3,37 +3,52 @@
 		this.scope = {
 			libPath : '',
 			appPath : '',
+			params : [],
 			modules : []
-		}
+		};
 
-		var vendors = [
-			'jquery.js'
-		];
+		this.route = {
+			routes : [],
+			params : [],
+			session : {
+				lang : 'en'
+			}
+		};
 
 		var initialize = function() {
-			var self = this,
-			iterations = vendors.length;
+			var self = this, vendors = ['jquery.js'];
 
-			var scripts = document.getElementsByTagName('script');
-			for (var i = 0; i < scripts.length; i++) {
-				var c = scripts[i];
-				if (typeof c.getAttribute('data-main') == 'string') {
-					self.scope.libPath = c.getAttribute('src').match(/^(.*\/)\w+\.js$/)[1];
-					self.scope.appPath = c.getAttribute('data-main');
-					break;
-				}
-			}
+			var preRoute = function() {
 
-			var complete = function() {
-				if (--iterations > 0)
-					return;
-				
-				self.require('app');
 			};
 
-			for (var i in vendors)
-				self.require(self.scope.libPath + vendors[i], complete);
+			var preConfigure = function() {
+				iterations = vendors.length;
 
+				var scripts = document.getElementsByTagName('script');
+				for (var i = 0; i < scripts.length; i++) {
+					var c = scripts[i];
+					if (typeof c.getAttribute('data-main') == 'string') {
+						self.scope.libPath = c.getAttribute('src').match(/^(.*\/)\w+\.js$/)[1];
+						self.scope.appPath = c.getAttribute('data-main');
+						break;
+					}
+				}
+
+				var complete = function() {
+					if (--iterations > 0)
+						return;
+					
+					self.require('app', function() {
+						preRoute();
+					});
+				};
+
+				for (var i in vendors)
+					self.require(self.scope.libPath + vendors[i], complete);
+			};
+
+			preConfigure();
 		};
 
 		this.require = function(url, callback) {
