@@ -43,6 +43,28 @@
 			preConfigure();
 		};
 
+		this.load = function(params, callback) {
+			var iterations = params.length, d = null, i = 0;
+
+			if (typeof $ != 'undefined')
+				d = $.Deferred();
+
+			var complete = function() {
+				if (--iterations <= 0) {
+					if (typeof callback == 'function')
+						callback();
+					if (d != null)
+						d.resolve();
+				}
+			}
+
+			for (i in params) {
+				this.require(params[i], complete.bind(this));
+			}
+
+			return d;
+		}
+
 		this.router = function(params) {
 			var self = this;
 
