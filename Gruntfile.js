@@ -6,6 +6,9 @@ module.exports = function(grunt) {
         },
 
         uglify: {
+            options: {
+                 banner: '/* \n * @Author: Linuxenko Svetlana \n * @Project: CakeJS https://github.com/linuxenko/cakejs \n */\n'
+            },
             js: {
                 files: {
                     'cake.min.js': ['cake.js']
