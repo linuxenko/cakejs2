@@ -8,7 +8,7 @@ module.exports = function(grunt) {
         uglify: {
             js: {
                 files: {
-                    'cake.js': ['cake.min.js']
+                    'cake.min.js': ['cake.js']
                 }
             }
         }
