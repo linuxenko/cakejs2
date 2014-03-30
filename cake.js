@@ -19,11 +19,11 @@
 			var self = this, i = 0, vendors = ['jquery.js'];
 
 			var preConfigure = function() {
-				iterations = vendors.length;
+				var iterations = vendors.length, i, c,
+				scripts = document.getElementsByTagName('script');
 
-				var scripts = document.getElementsByTagName('script');
-				for (var i = 0; i < scripts.length; i++) {
-					var c = scripts[i];
+				for (i = 0; i < scripts.length; i++) {
+					c = scripts[i];
 					if (typeof c.getAttribute('data-main') == 'string') {
 						self.scope.libPath = c.getAttribute('src').match(/^(.*\/)\w+\.js$/)[1];
 						self.scope.appPath = c.getAttribute('data-main');
