@@ -1,4 +1,6 @@
 (function() {
+	'use strict';
+
 	var Module = function() {
 		this.scope = {
 			libPath : '',
@@ -14,7 +16,7 @@
 		};
 
 		var initialize = function() {
-			var self = this, vendors = ['jquery.js'];
+			var self = this, i = 0, vendors = ['jquery.js'];
 
 			var preConfigure = function() {
 				iterations = vendors.length;
@@ -36,7 +38,7 @@
 					self.require('app', null);
 				};
 
-				for (var i in vendors)
+				for (i in vendors)
 					self.require(self.scope.libPath + vendors[i], complete);
 			};
 
@@ -53,17 +55,17 @@
 				if (--iterations <= 0) {
 					if (typeof callback == 'function')
 						callback();
-					if (d != null)
+					if (d !== null)
 						d.resolve();
 				}
-			}
+			};
 
 			for (i in params) {
 				this.require(params[i], complete.bind(this));
 			}
 
 			return d;
-		}
+		};
 
 		this.router = function(params) {
 			var self = this;
@@ -79,7 +81,7 @@
 
 				for (var i in route.controllers)
 					self.require(route.controllers[i]);
-			}
+			};
 
 			var makeRoute = function() {
 				var hash = window.location.hash;
@@ -98,7 +100,7 @@
 				self.route.params = params;
 
 				openRoute(name);
-			}
+			};
 
 			window.onpopstate = makeRoute;
 			makeRoute();
@@ -112,8 +114,8 @@
 			return null;
 		};
 
-		this.require = function(url, callback) {
-			var self = this, url = url, callback = callback,
+		this.require = function(name, cb) {
+			var self = this, url = name, callback = cb,
 				script, d = null, modules = self.scope.modules, mod = null;
 
 			if (typeof $ != 'undefined')
@@ -122,7 +124,7 @@
 			if (typeof url == 'undefined')
 				return;
 
-			if ((mod = self.findModule(url)) != null) {
+			if ((mod = self.findModule(url)) !== null) {
 				d.resolve(mod.module);
 				if (typeof callback == 'function')
 					callback(mod.module);
@@ -141,12 +143,12 @@
 				if (typeof callback == 'function')
 					callback(this);
 				
-				if (d != null)
+				if (d !== null)
 					d.resolve(this);
 			};
 
 			script.onerror = function(e) {
-				if (d != null)
+				if (d !== null)
 					d.reject(e);
 			};
 
@@ -174,7 +176,7 @@
 						return false;
 
 				return true;
-			}
+			};
 
 			var appendModule = function(params) {
 				if (!hasModule(params.name))
@@ -187,13 +189,13 @@
 						return;
 
 									
-					var mods = new Object();
+					var mods = {};
 					for (var i in loadDeps) {
 						mods[loadDeps[i]] = self.findModule(loadDeps[i]).module;	
 					}
 
 					callback(mods);
-				}
+				};
 
 				for (var i in loadDeps)
 					this.require(loadDeps[i], complete);
@@ -224,18 +226,17 @@
 				;
 			};
 
+			/*jshint evil: true */
 			var parse = function(str, data) {
 				var c = new Function("obj",
-		        	"var p=[],print=function(){p.push.apply(p,arguments);};" +
-		        	"with(obj){p.push('" + str
-		          .replace(/[\r\t\n]/g, " ")
-		          .split("<?").join("\t")
-		          .replace(/((^|\?>)[^\t]*)'/g, "$1\r")
-		          .replace(/\t=(.*?)\?>/g, "',$1,'")
-		          .split("\t").join("');")
-		          .split("?>").join("p.push('")
-		          .split("\r").join("\\'")
-		      + "');return p.join('');};");
+					"var p=[],print=function(){p.push.apply(p,arguments);};" +"with(obj){p.push('" + str
+					.replace(/[\r\t\n]/g, " ")
+					.split("<?").join("\t")
+					.replace(/((^|\?>)[^\t]*)'/g, "$1\r")
+					.replace(/\t=(.*?)\?>/g, "',$1,'")
+					.split("\t").join("');")
+					.split("?>").join("p.push('")
+					.split("\r").join("\\'") + "');return p.join('');};");
 
 				return c(data);
 			};
