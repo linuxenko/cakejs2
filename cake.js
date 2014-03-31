@@ -16,30 +16,22 @@
 		};
 
 		var initialize = function() {
-			var self = this, i = 0, vendors = ['jquery.js'];
+			var self = this;
 
 			var preConfigure = function() {
-				var iterations = vendors.length, i, c,
+				var  i, c,
 				scripts = document.getElementsByTagName('script');
 
 				for (i = 0; i < scripts.length; i++) {
 					c = scripts[i];
 					if (typeof c.getAttribute('data-main') == 'string') {
-						self.scope.libPath = c.getAttribute('src').match(/^(.*\/)\w+\.js$/)[1];
+						self.scope.libPath = c.getAttribute('src').match(/^(.*\/).+\.js$/)[1];
 						self.scope.appPath = c.getAttribute('data-main');
 						break;
 					}
 				}
 
-				var complete = function() {
-					if (--iterations > 0)
-						return;
-					
-					self.require('app', null);
-				};
-
-				for (i in vendors)
-					self.require(self.scope.libPath + vendors[i], complete);
+				self.require('app', null);
 			};
 
 			preConfigure();
