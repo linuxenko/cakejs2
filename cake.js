@@ -25,13 +25,14 @@
 				for (i = 0; i < scripts.length; i++) {
 					c = scripts[i];
 					if (typeof c.getAttribute('data-main') == 'string') {
-						self.scope.libPath = c.getAttribute('src').match(/^(.*\/).+\.js$/)[1];
-						self.scope.appPath = c.getAttribute('data-main');
+						self.scope.libPath = c.getAttribute('src').match(/^(.*\/).+\.js$/)[1] || null;
+						self.scope.appPath = c.getAttribute('data-main') || null;
 						break;
 					}
 				}
 
-				self.require('app', null);
+				if (!self.findModule('App') && self.scope.appPath.length > 1)
+					self.require('app', null);
 			};
 
 			preConfigure();
