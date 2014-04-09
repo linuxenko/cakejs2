@@ -32,7 +32,7 @@
 				}
 
 				if (!self.findModule('App') && self.scope.appPath.length > 1)
-					self.require('app', null);
+					self.require('App', null);
 			};
 
 			preConfigure();
@@ -66,14 +66,18 @@
 			self.route.routes = params;
 
 			var openRoute = function(name) {
-				var route = self.route.routes[name];
+				var route = self.route.routes[name], i = 0;
 
 				if (typeof route.controllers == 'undefined')
 					return;
 
+				self.load(route.controllers, function() {
+					for (i =0; i < route.controllers.length; i++) {
+						self.findModule(route.controllers[i]).active = false;
+						self.startModule.call(self,route.controllers[i]);
+					}
 
-				for (var i in route.controllers)
-					self.require(route.controllers[i]);
+				});
 			};
 
 			var makeRoute = function() {
@@ -89,6 +93,8 @@
 				for (var i = 1; i < tmp.length; i++)
 					params.push(tmp[i]);
 
+				self.route.backName = self.route.name.toString();
+				self.route.backParams = self.route.params;
 				self.route.name = name;
 				self.route.params = params;
 
@@ -97,6 +103,35 @@
 
 			window.onpopstate = makeRoute;
 			makeRoute();
+		};
+
+		this.startModule = function(name) {
+			var self = this,
+			mod = self.findModule(name),
+			deps = {},
+			d,
+			i = 0;
+
+			if (mod === null || mod.active === true)
+				return;
+			
+			for (; i < mod.deps.length; i++) {
+				d = self.findModule(mod.deps[i]);
+				if (!d)
+					return self.load(mod.deps, self.startModule.bind(self, name));
+				
+				deps[d.name] = d.module;
+			}
+
+			mod.active = true;
+
+			if (typeof mod.module == 'function') {
+				mod.module(deps);
+			}
+
+			if (typeof mod.module == 'object' && typeof mod.module.init == 'function') {
+				mod.module.init(deps);
+			}
 		};
 
 		this.findModule = function(name) {
@@ -176,22 +211,8 @@
 					modules.push(params);
 			};
 
-			var loadDeps = function(loadDeps, callback) {
-				var complete = function() {
-					if (!hasModules(loadDeps) || typeof callback != 'function')
-						return;
-
-									
-					var mods = {};
-					for (var i in loadDeps) {
-						mods[loadDeps[i]] = self.findModule(loadDeps[i]).module;	
-					}
-
-					callback(mods);
-				};
-
-				for (var i in loadDeps)
-					this.require(loadDeps[i], complete);
+			var loadDeps = function(loadDeps, name) {
+		
 			};
 
 			var module = mod;
@@ -203,11 +224,11 @@
 				module = deps;
 
 			if (typeof deps == 'object' && (typeof mod == 'object' || typeof mod == 'function'))
-				loadDeps.call(this, deps, mod);
-			else if (typeof module == 'function')
+				loadDeps.call(this, deps, name);
+			else if (typeof module == 'function' && name == 'App')
 				module();
 
-			appendModule({name : name, deps : deps, module: module});
+			appendModule({name : name, deps : deps, module: module, active : (name == 'App')});
 		};
 
 		this.t = function(source, data) {
