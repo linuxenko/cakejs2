@@ -1,4 +1,4 @@
-(function() {
+;(function() {
 	'use strict';
 
 	var Module = function() {
@@ -31,8 +31,8 @@
 					}
 				}
 
-				if (!self.findModule('App') && self.scope.appPath.length > 1)
-					self.require('App', null);
+				//if (!self.findModule('App') && self.scope.appPath.length > 1)
+				//	self.require('App', null);
 			};
 
 			preConfigure();
@@ -95,6 +95,9 @@
 
 				self.route.backName = self.route.name.toString();
 				self.route.backParams = self.route.params;
+				if (typeof self.route.URL !== 'undefined' && self.route.backName != 'logout')
+					self.route.backURL = self.route.URL;
+				self.route.URL = window.location.href;
 				self.route.name = name;
 				self.route.params = params;
 
@@ -255,7 +258,13 @@
 				return c(data);
 			};
 
-			return parse(getSource(document.getElementById(source)), data);
+			try {
+				return parse(getSource(document.getElementById(source)), data);
+			} catch(e) {
+				throw 'No template found: ' + source;
+			}
+
+			return null;
 		};
 
 		initialize.call(this);
