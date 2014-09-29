@@ -1,4 +1,4 @@
-cakejs
+CakeJS
 ======
 
-Moving cakephp to the front-end
+Front-end Framework
