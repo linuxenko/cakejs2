@@ -9,8 +9,9 @@
  * DOM Templating
  * DI/AMD Support
 
+###Getting Started
 
-Enabling script tag:
+Enable script tag:
 ```html
 <script data-main="/assets/js/app/" src="/assets/js/cake.js" async ></script>
 ```
@@ -27,8 +28,10 @@ $c.define('App', function() {
 Example of module ('Controller/Home.js'):
 ```javascript
 /* 
-  Common AMD module, with only difference : dependecies is coming as an Array ([]) of names,
-  Therefore we can use dynamically created lists of dependencies (! requirejs can't )
+  Common AMD module, with only difference : dependecies is coming
+  as an Array ([]) of names,
+  Therefore we can use dynamically created lists of dependencies 
+  (! requirejs can't )
 */
 $c.define('Controller/Home', function() {
   var Module = function() {	
