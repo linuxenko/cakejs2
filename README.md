@@ -1,7 +1,7 @@
 ## CakeJS
 ======
 
-![alt tag](https://raw.githubusercontent.com/linuxenko/linuxenko.github.io/master/assets/files/cakejs.png)
+![alt tag](https://raw.githubusercontent.com/linuxenko/cakejs/outdated-v1/cakejs.png)
 
 *Lightweight Front-end Framework with:*
 
