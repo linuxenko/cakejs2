@@ -3,6 +3,10 @@
 
 ### UNDER ACTIVE DEVELOPMENT
 
+#### R&D
+
+ * A couple of [ideas](https://github.com/linuxenko/cakejs/issues/1) about next version.
+ * Some [thoughts](https://github.com/linuxenko/cakejs/blob/master/docs/THOUGHTS.md).
 
 #### History
 
