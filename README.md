@@ -12,3 +12,8 @@
 
  * Previous version [v1](https://github.com/linuxenko/cakejs/tree/outdated-v1) (2012)
  
+## License
+
+GPL
+
+Copyright © 2012 Svetlana Linuxenko
