@@ -14,6 +14,6 @@
  
 ## License
 
-GPL
+GPLv3
 
 Copyright © 2012 Svetlana Linuxenko
