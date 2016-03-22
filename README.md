@@ -8,7 +8,7 @@
  * A couple of [ideas](https://github.com/linuxenko/cakejs/issues/1) about next version.
  * Some [thoughts](https://github.com/linuxenko/cakejs/blob/master/docs/THOUGHTS.md).
  * Outdated frameworks [contest/research](https://github.com/b37t1td/retrojscontest)
- [![](https://raw.githubusercontent.com/linuxenko/linuxenko.github.io/master/showcase/file/retrojs.png)](https://raw.githubusercontent.com/linuxenko/linuxenko.github.io/master/showcase/file/retrojs.png)
+ [![](https://raw.githubusercontent.com/linuxenko/linuxenko.github.io/master/showcase/file/retrojs.png)](https://github.com/b37t1td/retrojscontest)
 
 #### History
 
