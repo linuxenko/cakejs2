@@ -12,6 +12,7 @@
   "directories": {},
   "dependencies": {},
   "devDependencies": {
+    "basic-virtual-dom": "^0.1.1",
     "chai": "^3.5.0",
     "coveralls": "^2.11.15",
     "eslint": "^3.11.1",
@@ -22,8 +23,8 @@
   },
   "scripts": {
     "test": "npm run ci",
-    "mocha": "mocha tests/",
-    "lint": "eslint lib tests",
+    "mocha": "mocha tests/**",
+    "lint": "eslint lib/** tests/**",
     "ci": "npm run lint && npm run mocha",
     "cov": "nyc npm run ci && nyc report --reporter=text-lcov | coveralls"
   },
@@ -31,8 +32,7 @@
     "type": "git",
     "url": "git+https://github.com/linuxenko/cakejs.git"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "Svetlana Linuxenko <linuxenko@yahoo.com> (http://www.linuxenko.pro)",
   "license": "MIT",
   "bugs": {
