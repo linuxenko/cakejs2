@@ -118,12 +118,18 @@ describe('Caramel for the cake', function() {
     caramel.on('model:removed', function() { emitted++; });
 
     expect(caramel.listeners.length).to.be.equal(3);
-
     caramel.emit(/^model/);
-
     expect(emitted).to.be.equal(3);
-
     caramel.emit(/changed$/);
     expect(emitted).to.be.equal(4);
+  });
+
+  it('should emit with some data', function() {
+    var emitted = 0;
+    caramel.on('model:changed', function(e) { emitted = e; });
+    caramel.emit('model:changed', 7);
+    expect(emitted).to.be.equal(7);
+    caramel.emit(/changed$/, 5);
+    expect(emitted).to.be.equal(5);
   });
 });
