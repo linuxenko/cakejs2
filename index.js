@@ -1,1 +1,1 @@
-exports.recipes = require('./lib/recipes');
+module.exports = require('./lib/');

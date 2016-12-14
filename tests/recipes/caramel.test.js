@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var Caramel = require('../../').recipes.caramel;
+var Caramel = require('../../lib/recipes/caramel');
 
 describe('Caramel for the cake', function() {
   var caramel;
