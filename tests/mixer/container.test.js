@@ -70,8 +70,8 @@ describe('Container for ingredients', function() {
       hello : Bakery.inject('creams.injectable.hello')
     });
 
-    expect(c2.c1).to.be.equal(c1);
-    expect(c2.hello).to.be.equal('world');
+    expect(c2.get('c1')).to.be.equal(c1);
+    expect(c2.get('hello')).to.be.equal('world');
   });
 
   it('should register object after', function() {
@@ -91,7 +91,7 @@ describe('Container for ingredients', function() {
     Bakery.register('creams.cream_0', c1);
     Bakery.register('creams.cream_1', c2, 'creams.cream_0');
 
-    expect(Bakery.inject('creams.cream_1')).to.be.equal(c2);
+    expect(Bakery.inject('creams.cream_1')()).to.be.equal(c2);
   });
 
   it('should inject even before object registered', function() {

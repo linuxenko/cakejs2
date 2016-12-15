@@ -82,6 +82,27 @@ describe('Cream for the cake', function() {
   });
 
   it('should cream objects communicate with observers', function() {
+    var up = null;
+    var b = Cream.extend({
+      _namespace : 'creams.b',
+      test : 'hello'
+    });
+
+    Cream.extend({
+      _namespace : 'creams.c',
+      btest : Bakery.inject('creams.b'),
+      watch : function() { up = this.get('btest.test'); }.observes('btest.test')
+    });
+
+    expect(up).to.be.null;
+    b.set('test', 'world');
+
+    expect(up).to.be.equal('world');
+
+  });
+
+  it('should change injectable props', function() {
+    var up;
     var b = Cream.extend({
       _namespace : 'creams.b',
       test : 'hello'
@@ -90,10 +111,50 @@ describe('Cream for the cake', function() {
     var c = Cream.extend({
       _namespace : 'creams.c',
       btest : Bakery.inject('creams.b'),
-      watch : function() { console.log('aaa'); }.observes('btest')
+      watch : function() { up = this.get('btest.test'); }.observes('btest.test')
     });
 
-    b.set('test', 'world');
+    expect(b.get('test')).to.be.equal('hello');
+    c.set('btest.test', 'world');
+    expect(b.get('test')).to.be.equal('world');
+    expect(up).to.be.equal('world');
+  });
 
+  it('should change nested props', function() {
+    var b = Cream.extend({
+      _namespace : 'creams.b',
+      test : { a : 'b'}
+    });
+
+    var c = Cream.extend({
+      _namespace : 'creams.c',
+      btest : Bakery.inject('creams.b.test'),
+    });
+
+    expect(b.get('test.a')).to.be.equal('b');
+    expect(c.get('btest.a')).to.be.equal('b');
+    c.set('btest.a', 'c');
+    expect(b.get('test.a')).to.be.equal('c');
+    expect(c.get('btest.a')).to.be.equal('c');
+  });
+
+  it('should observer nested props', function() {
+    var up;
+    var b = Cream.extend({
+      _namespace : 'creams.b',
+      test : { a : 'hello' }
+    });
+
+    var c = Cream.extend({
+      _namespace : 'creams.c',
+      vvar : {sss : 1},
+      btest : Bakery.inject('creams.b.test'),
+      watch : function() { up = this.get('btest.a'); }.observes('btest.a')
+    });
+
+    b.set('test.a', 'world');
+    expect(up).to.be.equal('world');
+    c.set('btest.a', 'kkk');
+    expect(up).to.be.equal('kkk');
   });
 });
