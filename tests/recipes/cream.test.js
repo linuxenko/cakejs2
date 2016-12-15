@@ -138,23 +138,122 @@ describe('Cream for the cake', function() {
     expect(c.get('btest.a')).to.be.equal('c');
   });
 
-  it('should observer nested props', function() {
+  it('should observer nested props', function(done) {
     var up;
     var b = Cream.extend({
       _namespace : 'creams.b',
-      test : { a : 'hello' }
+      test : { a : 'hello' },
+      complete : false,
+      v : Bakery.inject('creams.c.vvar')
     });
 
     var c = Cream.extend({
       _namespace : 'creams.c',
       vvar : {sss : 1},
       btest : Bakery.inject('creams.b.test'),
-      watch : function() { up = this.get('btest.a'); }.observes('btest.a')
+      watch : function() { up = this.get('btest.a'); }.observes('btest.a'),
+      done : function() { done(); }.observes('creams.b.complete')
     });
 
     b.set('test.a', 'world');
     expect(up).to.be.equal('world');
     c.set('btest.a', 'kkk');
     expect(up).to.be.equal('kkk');
+    expect(b.get('v.sss')).to.be.equal(1);
+    expect(b.set('v.sss', 2)).to.be.exists;
+    expect(c.get('vvar.sss')).to.be.equal(2);
+    b.set('complete', true);
+  });
+
+  it('should set/get different types of properties', function() {
+    var b = Cream.extend({
+      test : { a : 'hello' },
+      bool : false,
+      undef : undefined,
+      nil : null,
+      reg : /^$/
+    });
+
+    expect(b.get('bool')).to.be.equal(false);
+    expect(b.get('undef')).to.be.equal(undefined);
+    expect(b.get('nil')).to.be.equal(null);
+    expect(b.get('reg')).to.be.instanceof(RegExp);
+
+    b.set('bool', true);
+    b.set('undef', new Object());
+    b.set('nil', false);
+    b.set('reg', /^test/);
+
+    expect(b.get('bool')).to.be.equal(true);
+    expect(b.get('undef')).to.be.instanceof(Object);
+    expect(b.get('nil')).to.be.equal(false);
+    expect(b.get('reg')).to.be.instanceof(RegExp);
+
+    b.set('bool', false);
+    b.set('undef', undefined);
+    b.set('nil', null);
+    b.set('reg', /^/);
+
+    expect(b.get('bool')).to.be.equal(false);
+    expect(b.get('undef')).to.be.equal(undefined);
+    expect(b.get('nil')).to.be.equal(null);
+    expect(b.get('reg')).to.be.instanceof(RegExp);
+  });
+
+  it('should hanlde deep set/get different types', function() {
+    var b = Cream.extend({
+      test : {
+        bool : false,
+        undef : undefined,
+        nil : null,
+        reg : /^$/
+      }
+    });
+
+    expect(b.get('test.bool')).to.be.equal(false);
+    expect(b.get('test.undef')).to.be.equal(undefined);
+    expect(b.get('test.nil')).to.be.equal(null);
+    expect(b.get('test.reg')).to.be.instanceof(RegExp);
+
+    b.set('test.bool', true);
+    b.set('test.undef', new Object());
+    b.set('test.nil', false);
+    b.set('test.reg', /^test/);
+
+    expect(b.get('test.bool')).to.be.equal(true);
+    expect(b.get('test.undef')).to.be.instanceof(Object);
+    expect(b.get('test.nil')).to.be.equal(false);
+    expect(b.get('test.reg')).to.be.instanceof(RegExp);
+  });
+
+  it('should handle deep set/get injected with diff types', function() {
+    Cream.extend({
+      _namespace : 'creams.c',
+      test : {
+        bool : false,
+        undef : undefined,
+        nil : null,
+        reg : /^$/
+      }
+    });
+
+    var b = Cream.extend({
+      test : Bakery.inject('creams.c.test')
+    });
+
+    expect(b.get('test.bool')).to.be.equal(false);
+    expect(b.get('test.undef')).to.be.equal(undefined);
+    expect(b.get('test.nil')).to.be.equal(null);
+    expect(b.get('test.reg')).to.be.instanceof(RegExp);
+
+    b.set('test.bool', true);
+    b.set('test.undef', new Object());
+    b.set('test.nil', false);
+    b.set('test.reg', /^test/);
+
+    expect(b.get('test.bool')).to.be.equal(true);
+    expect(b.get('test.undef')).to.be.instanceof(Object);
+    expect(b.get('test.nil')).to.be.equal(false);
+    expect(b.get('test.reg')).to.be.instanceof(RegExp);
   });
 });
