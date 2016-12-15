@@ -167,6 +167,7 @@ describe('Cream for the cake', function() {
 
   it('should set/get different types of properties', function() {
     var b = Cream.extend({
+      _namespace : 'creams.b',
       test : { a : 'hello' },
       bool : false,
       undef : undefined,
@@ -202,6 +203,7 @@ describe('Cream for the cake', function() {
 
   it('should hanlde deep set/get different types', function() {
     var b = Cream.extend({
+      _namespace : 'creams.b',
       test : {
         bool : false,
         undef : undefined,
@@ -238,6 +240,7 @@ describe('Cream for the cake', function() {
     });
 
     var b = Cream.extend({
+      _namespace : 'creams.b',
       test : Bakery.inject('creams.c.test')
     });
 
@@ -255,5 +258,75 @@ describe('Cream for the cake', function() {
     expect(b.get('test.undef')).to.be.instanceof(Object);
     expect(b.get('test.nil')).to.be.equal(false);
     expect(b.get('test.reg')).to.be.instanceof(RegExp);
+  });
+
+  it('should deal with broken setters', function() {
+    var c = Cream.extend({
+      _namespace : 'creams.c',
+
+    });
+
+    expect(function() {
+      c.set('test.ccc', 'hello');
+    }).to.throw();
+  });
+
+  it('should be initialized/deinitialized by di', function(done) {
+    var c = Cream.extend({
+      initialized : false,
+
+      init: function() {
+        this.set('initialized', true);
+      },
+
+      destroy : function() { done(); }
+    });
+
+    expect(c.get('initialized')).to.be.false;
+    Bakery.register('creams.c', c);
+    expect(c.get('initialized')).to.be.true;
+    Bakery.unregister('creams.c');
+  });
+
+  it('should prevent sets without namespace', function() {
+    var c = Cream.extend({});
+    expect(function() {
+      c.set('test', 123);
+    }).to.throw();
+  });
+
+  it('should prevent setup invalid props', function() {
+    var c = Cream.extend({ _namespace : 'creams.c' });
+
+    expect(function() { c.set(null, true); }).to.throw();
+    expect(function() { c.set(undefined, true); }).to.throw();
+    expect(function() { c.set(/^/, true); }).to.throw();
+    expect(function() { c.set(true, true); }).to.throw();
+    expect(function() { c.set('', true); }).to.throw();
+    expect(function() { c.set('.', true); }).to.throw();
+    expect(function() { c.set('t.', true); }).to.throw();
+  });
+
+  it('should handle minimal amount of array\'s fns', function() {
+    var numpushes = 0;
+    var c = Cream.extend({
+      _namespace : 'creams.c',
+      arr : [1,2,4,5],
+      watch : function() { numpushes++; }.observes('arr')
+    });
+
+    var b = Cream.extend({
+      _namespace : 'creams.b',
+      aa : Bakery.inject('creams.c'),
+      watch : function() { numpushes++; }.observes('aa.arr')
+    });
+
+    b.push('aa.arr', 6);
+    expect(c.arr.length).to.be.equal(5);
+    expect(b.pop('aa.arr')).to.be.equal(6);
+    expect(c.shift('arr')).to.be.equal(1);
+    expect(b.splice('aa.arr', 1, 1)).to.be.deep.equal([4]);
+    expect(b.get('aa.arr').length).to.be.equal(2);
+    expect(numpushes).to.be.equal(8);
   });
 });
