@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var Bakery = require('../../');
+var Bakery = require('../');
 
 describe('Container for ingredients', function() {
   afterEach(function() {
@@ -136,5 +136,28 @@ describe('Container for ingredients', function() {
     expect(c.get('test')).to.be.equal('world');
 
     Bakery.unregister('creams.observable_creams');
+  });
+
+  it('should register component with builtin _after prop', function(done) {
+    Bakery.Cream.extend({
+      _namespace : 'creams.a',
+      _after     : 'creams.c',
+      init : function() {
+        expect(Bakery._container.creams.b).to.be.exists;
+        expect(Bakery._container.creams.c).to.be.exists;
+        done();
+      }
+    });
+    Bakery.Cream.extend({
+      _namespace : 'creams.c',
+      _after     : 'creams.b',
+      init : function() {
+        expect(Bakery._container.creams.b).to.be.exists;
+        expect(Bakery._container.creams.a).not.to.be.exists;
+      }
+    });
+    Bakery.Cream.extend({
+      _namespace : 'creams.b'
+    });
   });
 });

@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var Bakery = require('../../');
+var Bakery = require('../');
 var Cream = Bakery.Cream;
 
 describe('Cream for the cake', function() {
