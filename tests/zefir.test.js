@@ -1,17 +1,11 @@
 var expect = require('chai').expect;
 
-var Bakery = require('../');
-var zefir;
+var zefir = require('../lib/zefir');
 
 describe('Zefir on top of the cake', function() {
-  before(function() {
-    zefir = require('../lib/zefir');
-  });
-
   after(function() {
-    Bakery.unregister('zefir');
+    zefir.set('routes', []);
   });
-
   it('should hanlde route props', function() {
     expect(zefir).to.be.exists;
     zefir.route('/', 'routes.home');
@@ -33,5 +27,20 @@ describe('Zefir on top of the cake', function() {
     zefir.set('location', '/posts/123/post');
     expect(zefir.current.cream).to.be.equal('routes.post');
     expect(zefir.current.props.tt).to.be.equal('123');
+  });
+
+  it('should hanlde provided query params', function() {
+    expect(zefir).to.be.exists;
+    zefir.route('/', 'routes.home');
+    zefir.route('/posts/:tt/post', 'routes.post');
+    zefir.set('location', 'http://a.b/posts/123/post?test=123');
+
+    expect(zefir.current.params).to.be.deep.equal({ test : '123' });
+
+    zefir.set('location', '/?t=a&b=');
+    expect(zefir.current.params.t).to.be.equal('a');
+    expect(zefir.current.params.b).to.be.equal('');
+    zefir.set('location', '/?t=a&b');
+    expect(zefir.current.params.b).to.be.an('undefined');
   });
 });

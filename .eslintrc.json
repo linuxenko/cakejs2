@@ -6,7 +6,9 @@
     "extends": "eslint:recommended",
     "globals" : {
       "describe" : true,
-      "it" : true
+      "it" : true,
+      "window" : true,
+      "document" : true
     },
     "rules": {
         "indent": [

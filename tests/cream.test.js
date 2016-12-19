@@ -271,22 +271,22 @@ describe('Cream for the cake', function() {
     }).to.throw();
   });
 
-  it('should be initialized/deinitialized by di', function(done) {
-    var c = Cream.extend({
-      initialized : false,
-
-      init: function() {
-        this.set('initialized', true);
-      },
-
-      destroy : function() { done(); }
-    });
-
-    expect(c.get('initialized')).to.be.false;
-    Bakery.register('creams.c', c);
-    expect(c.get('initialized')).to.be.true;
-    Bakery.unregister('creams.c');
-  });
+//  it('should be initialized/deinitialized by di', function(done) {
+//    var c = Cream.extend({
+//      initialized : false,
+//
+//      init: function() {
+//        this.set('initialized', true);
+//      },
+//
+//      destroy : function() { done(); }
+//    });
+//
+//    expect(c.get('initialized')).to.be.false;
+//    Bakery.register('creams.c', c);
+//    expect(c.get('initialized')).to.be.true;
+//    Bakery.unregister('creams.c');
+//  });
 
   it('should prevent sets without namespace', function() {
     var c = Cream.extend({});
@@ -328,5 +328,18 @@ describe('Cream for the cake', function() {
     expect(b.splice('aa.arr', 1, 1)).to.be.deep.equal([4]);
     expect(b.get('aa.arr').length).to.be.equal(2);
     expect(numpushes).to.be.equal(8);
+  });
+
+  it('should extend himselfs', function() {
+    var c = Cream.extend({
+      _namespace : 'creams.c',
+      hello : function() {}
+    });
+
+    var b = c.extend({
+      _namespace : 'creams.b'
+    });
+
+    expect(b.hello).to.be.a('function');
   });
 });
