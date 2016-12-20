@@ -10,21 +10,21 @@ describe('Zefir on top of the cake', function() {
     expect(zefir).to.be.exists;
     zefir.route('/', 'routes.home');
     zefir.route('/posts/:tt/post', 'routes.post');
-    zefir.set('location', 'http://a.b/posts/123/post');
+    zefir.locationWatcher('http://a.b/posts/123/post');
 
     expect(zefir.current.cream).to.be.equal('routes.post');
     expect(zefir.current.props.tt).to.be.equal('123');
 
-    zefir.set('location', 'https://n.a/');
+    zefir.locationWatcher('https://n.a/');
     expect(zefir.current.cream).to.be.equal('routes.home');
-    zefir.set('location', 'https://f.x/s/1/post');
+    zefir.locationWatcher('https://f.x/s/1/post');
     expect(zefir.current).to.be.an('undefined');
 
-    zefir.set('location', '/dfds');
+    zefir.locationWatcher('/dfds');
     expect(zefir.current).to.be.an('undefined');
-    zefir.set('location', '/');
+    zefir.locationWatcher( '/');
     expect(zefir.current.cream).to.be.equal('routes.home');
-    zefir.set('location', '/posts/123/post');
+    zefir.locationWatcher('/posts/123/post');
     expect(zefir.current.cream).to.be.equal('routes.post');
     expect(zefir.current.props.tt).to.be.equal('123');
   });
@@ -33,14 +33,14 @@ describe('Zefir on top of the cake', function() {
     expect(zefir).to.be.exists;
     zefir.route('/', 'routes.home');
     zefir.route('/posts/:tt/post', 'routes.post');
-    zefir.set('location', 'http://a.b/posts/123/post?test=123');
+    zefir.locationWatcher('http://a.b/posts/123/post?test=123');
 
     expect(zefir.current.params).to.be.deep.equal({ test : '123' });
 
-    zefir.set('location', '/?t=a&b=');
+    zefir.locationWatcher('/?t=a&b=');
     expect(zefir.current.params.t).to.be.equal('a');
     expect(zefir.current.params.b).to.be.equal('');
-    zefir.set('location', '/?t=a&b');
+    zefir.locationWatcher('/?t=a&b');
     expect(zefir.current.params.b).to.be.an('undefined');
   });
 });

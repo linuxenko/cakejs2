@@ -19,7 +19,8 @@
     "jsdom": "^9.8.3",
     "jsdom-global": "^2.1.0",
     "mocha": "^3.2.0",
-    "nyc": "^10.0.0"
+    "nyc": "^10.0.0",
+    "sinon": "^1.17.6"
   },
   "scripts": {
     "test": "npm run ci",
