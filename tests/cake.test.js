@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
 var sinon  = require('sinon');
+var h = require('basic-virtual-dom').h;
 var cake = require('../');
 var c;
 
@@ -18,7 +19,6 @@ function propagateToGlobal (window) {
     global[key] = window[key];
   }
 }
-
 
 describe('Cake', function() {
   before(function() {
@@ -60,7 +60,7 @@ describe('Cake', function() {
     cake.Cream.extend({
       _namespace : 'routes.hello',
       didTransition : didTransition,
-      willTransition : willTransition 
+      willTransition : willTransition
     });
 
     c.route('/home/:id', 'routes.hello');
@@ -75,5 +75,42 @@ describe('Cake', function() {
 
     expect(didTransition.calledOnce).to.be.true;
     expect(didTransition.calledOnce).to.be.true;
+  });
+
+  it('should provide props and params', function() {
+    var r = cake.Cream.extend({
+      _namespace : 'routes.hello'
+    });
+
+    c.route('/home/:id', 'routes.hello');
+    jsdom.changeURL(window, 'http://localhost/home/123?test=321');
+    c.get('zefir').deviceWatcher();
+
+    expect(r.get('props.id')).to.be.equal('123');
+    expect(r.get('params.test')).to.be.equal('321');
+
+    jsdom.changeURL(window, 'http://localhost/home/2?test=21');
+    c.get('zefir').deviceWatcher();
+
+    expect(r.get('props.id')).to.be.equal('2');
+    expect(r.get('params.test')).to.be.equal('21');
+  });
+
+  it('should render from provided namespace', function() {
+    var rndrSpy = sinon.spy();
+
+    cake.Cream.extend({
+      _namespace : 'routes.hello',
+      render : function() {
+        rndrSpy();
+        return h('div', null, 'hello world');
+      }
+    });
+
+    c.route('/home/:id', 'routes.hello');
+    jsdom.changeURL(window, 'http://localhost/home/123?test=321');
+    c.get('zefir').deviceWatcher();
+
+    expect(rndrSpy.calledOnce).to.be.true;
   });
 });

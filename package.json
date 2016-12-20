@@ -10,14 +10,14 @@
     "LICENSE"
   ],
   "directories": {},
-  "dependencies": {},
+  "dependencies": {
+    "basic-virtual-dom": "^0.1.1"
+  },
   "devDependencies": {
-    "basic-virtual-dom": "^0.1.1",
     "chai": "^3.5.0",
     "coveralls": "^2.11.15",
     "eslint": "^3.11.1",
     "jsdom": "^9.8.3",
-    "jsdom-global": "^2.1.0",
     "mocha": "^3.2.0",
     "nyc": "^10.0.0",
     "sinon": "^1.17.6"
