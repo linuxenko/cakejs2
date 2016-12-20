@@ -129,32 +129,39 @@ describe('Cake', function() {
   });
 
   it('shoud render nested namespace', function() {
-//    var b = cake.Cream.extend({
-//      _namespace : 'routes.hello.nested',
-//      helloText : 'hello'
-//    });
+    var b = cake.Cream.extend({
+      _namespace : 'routes.hello.nested',
+      helloText : 'hello'
+    });
 
-//    var r = cake.Cream.extend({
-//      _namespace : 'routes.hello',
-//
-//      render : function() {
-//        console.log(this.get('helloText'));
-//        return h('div', { id : 'rtest'}, this.get('helloText'));
-//      }
-//    });
+    var r = cake.Cream.extend({
+      _namespace : 'routes.hello',
+      hello : cake.inject('routes.hello.nested.helloText'),
 
+      render : function() {
+        console.log(this.get('hello'));
+        return h('div', { id : 'rtest'}, this.get('hello'));
+      }
+    });
 
-//    c.route('/home/:id', 'routes.hello');
-//    jsdom.changeURL(window, 'http://localhost/home/23?test=321');
-//    c.get('zefir').deviceWatcher();
+    c.route('/home/:id', 'routes.hello');
+    jsdom.changeURL(window, 'http://localhost/home/23?test=321');
+    c.get('zefir').deviceWatcher();
+    c._updateWatcher();
+
+    var element = document.getElementById('rtest');
+
+    expect(element.textContent).to.be.equal('hello');
+
+    r.set('hello', 'world');
+    console.log(r.hello);
+    console.log(r.get('hello'));
+    c._updateWatcher();
+    expect(element.textContent).to.be.equal('world');
+
+//    b.set('helloText', 'hello123');
+//    console.log(r.hello);
 //    c._updateWatcher();
-
-//    var element = document.getElementById('rtest');
-//
-//    console.log(document.body.innerHTML);
-
-
+//    expect(element.textContent).to.be.equal('hello123');
   });
-
-
 });

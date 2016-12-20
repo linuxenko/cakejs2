@@ -342,4 +342,23 @@ describe('Cream for the cake', function() {
 
     expect(b.hello).to.be.a('function');
   });
+
+  it('should handle recursive setters', function() {
+    var c = Cream.extend({
+      _namespace : 'creams.c',
+      hello : 'hello'
+    });
+
+    var b = Cream.extend({
+      _namespace : 'creams.b',
+      text : Bakery.inject('creams.c.hello')
+    });
+
+    expect(b.text).to.be.a('function');
+    b.set('text', 'world');
+    expect(b.text).to.be.a('function');
+    c.set('hello', '123');
+    expect(b.text).to.be.a('function');
+    expect(b.get('text')).to.be.equal('123');
+  });
 });
