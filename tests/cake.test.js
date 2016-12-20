@@ -139,7 +139,6 @@ describe('Cake', function() {
       hello : cake.inject('routes.hello.nested.helloText'),
 
       render : function() {
-        console.log(this.get('hello'));
         return h('div', { id : 'rtest'}, this.get('hello'));
       }
     });
@@ -154,14 +153,11 @@ describe('Cake', function() {
     expect(element.textContent).to.be.equal('hello');
 
     r.set('hello', 'world');
-    console.log(r.hello);
-    console.log(r.get('hello'));
     c._updateWatcher();
     expect(element.textContent).to.be.equal('world');
 
-//    b.set('helloText', 'hello123');
-//    console.log(r.hello);
-//    c._updateWatcher();
-//    expect(element.textContent).to.be.equal('hello123');
+    b.set('helloText', 'hello123');
+    c._updateWatcher();
+    expect(element.textContent).to.be.equal('hello123');
   });
 });

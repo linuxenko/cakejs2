@@ -177,7 +177,7 @@ describe('Container for ingredients', function() {
     expect(a.get('nested.text')).to.be.equal('hello');
   });
 
-  it.only('should inject nonobj props', function() {
+  it('should inject nonobject props', function() {
     var b = Bakery.Cream.extend({
       _namespace : 'creams.hello.nested',
       helloText : 'hello'
@@ -190,6 +190,7 @@ describe('Container for ingredients', function() {
 
     expect(b.get('helloText')).to.be.equal(r.get('hello'));
     r.set('hello', 'world');
-    console.log(r.get('hello'));
+    expect(b.get('helloText')).to.be.equal('world');
+    expect(r.get('hello')).to.be.equal('world');
   });
 });
