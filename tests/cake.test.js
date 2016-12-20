@@ -29,10 +29,16 @@ describe('Cake', function() {
     c.get('zefir').set('routes', []);
     c.destroy();
     cake.unregister('cake');
+    cake.unregister('routes');
+    cake.unregister('zefir');
   });
 
   beforeEach(function() {
     c.get('zefir').set('routes', []);
+  });
+
+  afterEach(function() {
+    cake.unregister('routes');
   });
 
   it('should bake some cake', function() {
@@ -99,11 +105,13 @@ describe('Cake', function() {
   it('should render from provided namespace', function() {
     var rndrSpy = sinon.spy();
 
-    cake.Cream.extend({
+    var r = cake.Cream.extend({
       _namespace : 'routes.hello',
+      helloText : 'hello',
+
       render : function() {
         rndrSpy();
-        return h('div', null, 'hello world');
+        return h('div', null, this.get('helloText'));
       }
     });
 
@@ -112,5 +120,41 @@ describe('Cake', function() {
     c.get('zefir').deviceWatcher();
 
     expect(rndrSpy.calledOnce).to.be.true;
+    expect(document.body.innerHTML)
+      .to.be.equal('<div class="cake" id="cake"><div>hello</div></div>');
+    r.set('helloText', 'world');
+    c._updateWatcher();
+    expect(document.body.innerHTML)
+      .to.be.equal('<div class="cake" id="cake"><div>world</div></div>');
   });
+
+  it('shoud render nested namespace', function() {
+//    var b = cake.Cream.extend({
+//      _namespace : 'routes.hello.nested',
+//      helloText : 'hello'
+//    });
+
+//    var r = cake.Cream.extend({
+//      _namespace : 'routes.hello',
+//
+//      render : function() {
+//        console.log(this.get('helloText'));
+//        return h('div', { id : 'rtest'}, this.get('helloText'));
+//      }
+//    });
+
+
+//    c.route('/home/:id', 'routes.hello');
+//    jsdom.changeURL(window, 'http://localhost/home/23?test=321');
+//    c.get('zefir').deviceWatcher();
+//    c._updateWatcher();
+
+//    var element = document.getElementById('rtest');
+//
+//    console.log(document.body.innerHTML);
+
+
+  });
+
+
 });

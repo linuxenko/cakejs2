@@ -16,7 +16,6 @@ describe('Container for ingredients', function() {
 
   it('should be empty container', function() {
     expect(Bakery._container).to.be.exists;
-//    expect(Bakery._container).to.be.deep.equal({});
   });
 
   it('should register objects in container', function() {
@@ -31,10 +30,10 @@ describe('Container for ingredients', function() {
     Bakery.register('creams.cream_3', c4);
 
     expect(Object.keys(Bakery._container.creams).length).to.be.equal(4);
-    expect(Bakery._container.creams.cream_0).to.be.equal(c1);
-    expect(Bakery._container.creams.cream_1).to.be.equal(c2);
-    expect(Bakery._container.creams.cream_2).to.be.equal(c3);
-    expect(Bakery._container.creams.cream_3).to.be.equal(c4);
+    expect(Bakery._container.creams.cream_0.cream).to.be.equal(c1);
+    expect(Bakery._container.creams.cream_1.cream).to.be.equal(c2);
+    expect(Bakery._container.creams.cream_2.cream).to.be.equal(c3);
+    expect(Bakery._container.creams.cream_3.cream).to.be.equal(c4);
   });
 
   it('should unregister container objects', function() {
@@ -46,8 +45,8 @@ describe('Container for ingredients', function() {
     Bakery.register('creams.cream_0', c1);
     Bakery.register('creams.cream_1', c2);
 
-    expect(Bakery._container.creams.cream_0).to.be.equal(c1);
-    expect(Bakery._container.creams.cream_1).to.be.equal(c2);
+    expect(Bakery._container.creams.cream_0.cream).to.be.equal(c1);
+    expect(Bakery._container.creams.cream_1.cream).to.be.equal(c2);
 
     Bakery.unregister('creams.cream_0');
     Bakery.unregister('creams.cream_1');
@@ -81,7 +80,7 @@ describe('Container for ingredients', function() {
     Bakery.register('creams.cream_1', c2, 'creams.cream_0');
     expect(Bakery._container.creams).to.be.an('undefined');
     Bakery.register('creams.cream_0', c1);
-    expect(Bakery._container.creams.cream_1).to.be.equal(c2);
+    expect(Bakery._container.creams.cream_1.cream).to.be.equal(c2);
   });
 
   it('should register after with any order', function() {
@@ -121,7 +120,7 @@ describe('Container for ingredients', function() {
       _namespace : 'creams.selfreg'
     });
 
-    expect(Bakery._container.creams.selfreg).to.be.equal(c);
+    expect(Bakery._container.creams.selfreg.cream).to.be.equal(c);
     expect(c._namespace).to.be.equal(c.get('_namespace'));
   });
 
@@ -161,5 +160,20 @@ describe('Container for ingredients', function() {
 
     c.init();
     b.init();
+  });
+
+  it('shoud make nested creams nested', function() {
+    Bakery.Cream.extend({
+      _namespace : 'creams.a.b',
+      text : 'hello'
+    });
+
+    var a = Bakery.Cream.extend({
+      _namespace : 'creams.a',
+      nested : Bakery.inject('creams.a.b')
+    });
+
+    expect(a.get('nested._namespace')).to.be.equal('creams.a.b');
+    expect(a.get('nested.text')).to.be.equal('hello');
   });
 });
