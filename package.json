@@ -1,6 +1,6 @@
 {
   "name": "cakejs2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Lightweight front-end framework with only best parts and features of most awesome frameworks.",
   "main": "index.js",
   "files": [
@@ -12,7 +12,7 @@
     "LICENSE"
   ],
   "dependencies": {
-    "basic-virtual-dom": "^0.1.5"
+    "basic-virtual-dom": "^0.1.6"
   },
   "devDependencies": {
     "browserify": "^13.1.1",
@@ -31,7 +31,7 @@
     "lint": "eslint lib/** tests/**",
     "ci": "npm run lint && npm run mocha",
     "cov": "nyc npm run ci && nyc report --reporter=text-lcov | coveralls",
-    "prepublish": "mkdir dist && browserify contrib/dist.js | uglifyjs -c > dist/cake.min.js"
+    "prepublish": "mkdir -p dist && browserify contrib/dist.js | uglifyjs -c > dist/cake.min.js"
   },
   "repository": {
     "type": "git",

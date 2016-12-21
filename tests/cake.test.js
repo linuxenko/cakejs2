@@ -190,4 +190,18 @@ describe('Cake', function() {
 
     expect(initSpy.calledOnce).to.be.true;
   });
+
+  it('should handle any-route pattern', function() {
+    jsdom.changeURL(window, 'http://localhost:80/not-foun/d/123');
+
+    var initSpy = sinon.spy();
+    cake.Cream.extend({
+      _namespace : 'routes.home',
+      init : initSpy
+    });
+
+    c.route('*', 'routes.home');
+
+    expect(initSpy.calledOnce).to.be.true;
+  });
 });

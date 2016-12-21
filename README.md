@@ -7,10 +7,10 @@
 
   * All in one
   * [Dependency management](./contrib/di.md)
-  * [Live rendering](./contrib/loop.md) ( + [virtual dom](https://unpkg.com/cakejs2@latest/dist/cake.min.js) )
+  * [Live rendering](./contrib/loop.md) (+ [virtual dom](https://github.com/linuxenko/basic-virtual-dom))
   * JSX support
   * Small error stack trace (?)
-  * Small size and codebase ([about 23kb](./dist/cake.min.js))
+  * Small size and codebase ([about 23kb](https://unpkg.com/cakejs2@latest/dist/cake.min.js))
   * ES5 support (Yeah!)
   * Very simple to learn
 
@@ -73,6 +73,18 @@ create({
   elementId    : cake
 
 ```
+
+`route`:
+
+```js
+create().route(
+ '/posts/:id/post',  // URL pattern, also available "*" pattern
+ 'home'             // Namespace of the component
+ );
+
+```
+
+**Namespaces**
 
 #### History
 
