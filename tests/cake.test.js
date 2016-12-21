@@ -117,7 +117,6 @@ describe('Cake', function() {
 
     c.route('/home/:id', 'routes.hello');
     jsdom.changeURL(window, 'http://localhost/home/123?test=321');
-    c.get('zefir').deviceWatcher();
 
     expect(rndrSpy.calledOnce).to.be.true;
     expect(document.body.innerHTML)
@@ -129,6 +128,7 @@ describe('Cake', function() {
   });
 
   it('shoud render nested namespace', function() {
+    var renderSpy = sinon.spy();
     var b = cake.Cream.extend({
       _namespace : 'routes.hello.nested',
       helloText : 'hello'
@@ -139,13 +139,14 @@ describe('Cake', function() {
       hello : cake.inject('routes.hello.nested.helloText'),
 
       render : function() {
+        renderSpy();
         return h('div', { id : 'rtest'}, this.get('hello'));
       }
     });
 
     c.route('/home/:id', 'routes.hello');
     jsdom.changeURL(window, 'http://localhost/home/23?test=321');
-    c.get('zefir').deviceWatcher();
+//    c.get('zefir').deviceWatcher();
     c._updateWatcher();
 
     var element = document.getElementById('rtest');
@@ -159,5 +160,34 @@ describe('Cake', function() {
     b.set('helloText', 'hello123');
     c._updateWatcher();
     expect(element.textContent).to.be.equal('hello123');
+    expect(renderSpy.callCount).to.be.equal(3);
+  });
+
+  it('should handle before initializers', function() {
+    jsdom.changeURL(window, 'http://localhost:80');
+
+    var initSpy = sinon.spy();
+    cake.Cream.extend({
+      _namespace : 'routes.home',
+      init : initSpy
+    });
+
+    c.route('/', 'routes.home');
+
+    expect(initSpy.calledOnce).to.be.true;
+  });
+
+  it('should handle after initializers', function() {
+    jsdom.changeURL(window, 'http://localhost:80');
+
+    var initSpy = sinon.spy();
+    cake.Cream.extend({
+      _namespace : 'routes.home',
+      init : initSpy
+    });
+
+    c.route('/', 'routes.home');
+
+    expect(initSpy.calledOnce).to.be.true;
   });
 });
