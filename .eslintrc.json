@@ -1,16 +1,19 @@
 {
     "env": {
-        "node": true
+        "node": true,
+        "mocha" : true
     },
     "extends": "eslint:recommended",
     "globals" : {
       "describe" : true,
-      "it" : true
+      "it" : true,
+      "window" : true,
+      "document" : true
     },
     "rules": {
         "indent": [
             "error",
-           2
+           2, { "SwitchCase" : 0 }
         ],
         "linebreak-style": [
             "error",

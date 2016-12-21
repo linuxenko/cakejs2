@@ -1,0 +1,1 @@
+window.cake = require('../');

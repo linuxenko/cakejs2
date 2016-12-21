@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+  <script src="../../dist/cake.js"></script>
+  <script>
+    var h = cake.h, create = cake.create, Cream = cake.Cream;
+
+    create().route('/examples/browser', 'counter');
+    Cream.extend({
+      _namespace : 'counter',
+      clicks : 0,
+      increment : function() {
+        this.set('clicks', this.clicks + 1);
+      },
+      render : function() {
+        return h('button', { onClick : this.increment }, 'clicks: ' + this.clicks);
+      }
+    });
+  </script>
+</body>
+</html>
