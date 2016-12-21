@@ -1,5 +1,5 @@
 [![CakeJs](https://raw.githubusercontent.com/linuxenko/cakejs/master/contrib/cakejs.png)](https://github.com/linuxenko/cakejs)
-[![Build Status](https://img.shields.io/travis/linuxenko/cakejs.svg?style=flat-square&branch=develop)](https://travis-ci.org/linuxenko/cakejs) [![Coveralls](https://img.shields.io/coveralls/linuxenko/cakejs/develop.svg?style=flat-square)](https://coveralls.io/github/linuxenko/cakejs) [![alpha](https://img.shields.io/badge/stability-Experimental-ff69b4.svg?style=flat-square)](https://github.com/linuxenko/cakejs)
+[![Build Status](https://img.shields.io/travis/linuxenko/cakejs.svg?style=flat-square)](https://travis-ci.org/linuxenko/cakejs) [![Coveralls](https://img.shields.io/coveralls/linuxenko/cakejs/master.svg?style=flat-square)](https://coveralls.io/github/linuxenko/cakejs) [![alpha](https://img.shields.io/badge/stability-Experimental-ff69b4.svg?style=flat-square)](https://github.com/linuxenko/cakejs)
 
 `CakeJS` is an experimental `front-end` framework for javascript with attempt to implement most awesome features of another frameworks with very small codebase.
 
@@ -10,7 +10,7 @@
   * [Live rendering](./contrib/loop.md) ( + [virtual dom](https://github.com/linuxenko/basic-virtual-dom) )
   * JSX support
   * Small error stack trace (?)
-  * Small size and codebase ([about 23kb](./dist/cake.js)
+  * Small size and codebase ([about 23kb](./dist/cake.min.js))
   * ES5 support (Yeah!)
   * Very simple to learn
 

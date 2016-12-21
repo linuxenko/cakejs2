@@ -1,9 +1,10 @@
 {
-  "name": "cakejs",
+  "name": "cakejs2",
   "version": "0.0.1",
   "description": "Lightweight front-end framework with only best parts and features of most awesome frameworks.",
   "main": "index.js",
   "files": [
+    "dist",
     "contrib",
     "lib",
     "index.js",
@@ -14,15 +15,13 @@
     "basic-virtual-dom": "^0.1.5"
   },
   "devDependencies": {
-    "browserify": "^13.1.1",
     "chai": "^3.5.0",
     "coveralls": "^2.11.15",
     "eslint": "^3.11.1",
     "jsdom": "^9.8.3",
     "mocha": "^3.2.0",
     "nyc": "^10.0.0",
-    "sinon": "^1.17.6",
-    "uglify-js": "^2.7.5"
+    "sinon": "^1.17.6"
   },
   "scripts": {
     "test": "npm run ci",
