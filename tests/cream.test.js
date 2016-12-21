@@ -326,8 +326,9 @@ describe('Cream for the cake', function() {
     expect(b.pop('aa.arr')).to.be.equal(6);
     expect(c.shift('arr')).to.be.equal(1);
     expect(b.splice('aa.arr', 1, 1)).to.be.deep.equal([4]);
-    expect(b.get('aa.arr').length).to.be.equal(2);
-    expect(numpushes).to.be.equal(8);
+    expect(b.unshift('aa.arr', 8)).to.be.equal(3);
+    expect(b.get('aa.arr').length).to.be.equal(3);
+    expect(numpushes).to.be.equal(10);
   });
 
   it('should extend himselfs', function() {
