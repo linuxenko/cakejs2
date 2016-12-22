@@ -67,7 +67,6 @@ https://unpkg.com/cakejs2@latest/dist/cake.min.js
 
   * `h`
   * [next](https://github.com/linuxenko/cakejs/blob/master/contrib/loop.md)
-  * `debounce`
   * [register](https://github.com/linuxenko/cakejs/blob/master/contrib/di.md)
   * [unregister](https://github.com/linuxenko/cakejs/blob/master/contrib/di.md)
   * [inject](https://github.com/linuxenko/cakejs/blob/master/contrib/di.md)
