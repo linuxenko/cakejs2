@@ -59,11 +59,13 @@ https://unpkg.com/cakejs2@latest/dist/cake.min.js
 
   * `h`
   * `next`
+  * `debounce`
   * `register`
   * `unregister`
   * `inject`
   * `create`
   * `destroy`
+  * `Cream`
 
 `create` options:
 

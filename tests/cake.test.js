@@ -80,7 +80,7 @@ describe('Cake', function() {
     c.get('zefir').deviceWatcher();
 
     expect(didTransition.calledOnce).to.be.true;
-    expect(didTransition.calledOnce).to.be.true;
+    expect(willTransition.calledOnce).to.be.true;
   });
 
   it('should provide props and params', function() {
@@ -166,13 +166,12 @@ describe('Cake', function() {
   it('should handle before initializers', function() {
     jsdom.changeURL(window, 'http://localhost:80');
 
+    c.route('/', 'routes.home');
     var initSpy = sinon.spy();
     cake.Cream.extend({
       _namespace : 'routes.home',
       init : initSpy
     });
-
-    c.route('/', 'routes.home');
 
     expect(initSpy.calledOnce).to.be.true;
   });
@@ -203,5 +202,28 @@ describe('Cake', function() {
     c.route('*', 'routes.home');
 
     expect(initSpy.calledOnce).to.be.true;
+  });
+
+  it('should not override routes by any-route', function() {
+    jsdom.changeURL(window, 'http://localhost:80/');
+
+    var anySpy = sinon.spy();
+    var homeSpy = sinon.spy();
+
+    c.route('/', 'routes.home');
+    c.route('*', 'routes.anyroute');
+
+    cake.Cream.extend({
+      _namespace : 'routes.home',
+      init : homeSpy
+    });
+
+    cake.Cream.extend({
+      _namespace : 'routes.anyroute',
+      init : anySpy
+    });
+
+    expect(anySpy.callCount).to.be.equal(0);
+    expect(homeSpy.calledOnce).to.be.true;
   });
 });
