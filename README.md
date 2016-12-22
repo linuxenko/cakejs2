@@ -41,6 +41,13 @@ To enable `JSX` support, transpiler option have to be provided that names defaul
 /** @jsx h */
 ```
 
+**Examples**
+
+Live demos:
+
+  * [todomvc](http://codepen.io/linuxenko/pen/jVRwLL)
+  * [js-repaint-perf](https://15lyfromsaturn.github.io/js-repaint-perfs/cakejs/index.html)
+
 Check out [examples](./examples) folder.
 
 **Installation**
