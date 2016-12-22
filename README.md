@@ -8,6 +8,7 @@
   * All in one
   * [Dependency management](./contrib/di.md)
   * [Live rendering](./contrib/loop.md) (+ [virtual dom](https://github.com/linuxenko/basic-virtual-dom))
+  * Good [performance](https://15lyfromsaturn.github.io/js-repaint-perfs/cakejs/index.html)
   * JSX support
   * Small error stack trace (?)
   * Small size and codebase ([about 23kb](https://unpkg.com/cakejs2@latest/dist/cake.min.js))

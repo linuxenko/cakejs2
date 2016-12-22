@@ -1,6 +1,6 @@
 {
   "name": "cakejs2",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Lightweight front-end framework with only best parts and features of most awesome frameworks.",
   "main": "index.js",
   "files": [
