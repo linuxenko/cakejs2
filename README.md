@@ -1,5 +1,6 @@
 [![CakeJs](https://raw.githubusercontent.com/linuxenko/cakejs/master/contrib/cakejs.png)](https://github.com/linuxenko/cakejs)
-[![Build Status](https://img.shields.io/travis/linuxenko/cakejs.svg?style=flat-square)](https://travis-ci.org/linuxenko/cakejs) [![Coveralls](https://img.shields.io/coveralls/linuxenko/cakejs/master.svg?style=flat-square)](https://coveralls.io/github/linuxenko/cakejs) [![npm version](https://img.shields.io/npm/v/cakejs2.svg?style=flat-square)](https://www.npmjs.com/package/cakejs2) [![alpha](https://img.shields.io/badge/stability-Experimental-ff69b4.svg?style=flat-square)](https://github.com/linuxenko/cakejs)
+
+[![Build Status](https://img.shields.io/travis/linuxenko/cakejs.svg?style=flat-square)](https://travis-ci.org/linuxenko/cakejs) [![Coveralls](https://img.shields.io/coveralls/linuxenko/cakejs/master.svg?style=flat-square)](https://coveralls.io/github/linuxenko/cakejs) [![npm version](https://img.shields.io/npm/v/cakejs2.svg?style=flat-square)](https://www.npmjs.com/package/cakejs2) [![license](https://img.shields.io/github/license/linuxenko/cakejs.svg?style=flat-square)]() [![alpha](https://img.shields.io/badge/stability-Experimental-ff69b4.svg?style=flat-square)](https://github.com/linuxenko/cakejs)
 
 `CakeJS2` lightweight front-end framework with only best parts and features of most awesome frameworks.
 
@@ -138,4 +139,6 @@ First version of `cakejs` were made in 2012th and [published](https://github.com
 
 #### License
 
-GPLv3 (c) Svetlana Linuxenko
+MIT License
+
+Copyright (c) 2016 Svetlana Linuxenko
