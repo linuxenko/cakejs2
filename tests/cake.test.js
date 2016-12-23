@@ -28,11 +28,7 @@ describe('Cake', function() {
   after(function() {
     c.get('zefir').set('routes', []);
     c.destroy();
-    cake.unregister('cake');
     cake.unregister('routes');
-    cake.unregister('zefir');
-
-    document.body.removeChild(document.getElementById('cake'));
   });
 
   beforeEach(function() {
