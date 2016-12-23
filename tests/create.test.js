@@ -18,6 +18,9 @@ function propagateToGlobal (window) {
 }
 
 describe('Some kitchen tests', function() {
+  after(function() {
+    cake.destroy();
+  });
   it('should replace existen element', function() {
     var el = document.createElement('div');
     el.setAttribute('id', 'cake');
@@ -38,27 +41,25 @@ describe('Some kitchen tests', function() {
     expect(document.getElementById('cake')).not.exists;
   });
 
-  it.only('should handle createRoot opts', function() {
+  it('should handle createRoot opts', function() {
     expect(document.getElementById('cake')).not.exists;
     cake.create({ createRoot : false });
     expect(document.getElementById('cake')).not.exists;
     cake.destroy();
     expect(document.getElementById('cake')).not.exists;
 
-    var c = cake.create({ createRoot : false });
+    var c = cake.create({ createRoot: false });
 
-    c.set('zefir.aaa', []);
     c.route('/', 'home');
 
     cake.Cream.extend({
       _namespace : 'home',
       render : function() {
-        return cake.h('div', { className : 'test' });
+        return cake.h('div', { id : 'test' }, '');
       }
     });
 
-    jsdom.changeURL(window, 'https://localhost/');
-    c.get('zefir').deviceWatcher();
-
+    expect(document.getElementById('cake')).not.be.exists;
+    expect(document.getElementById('test')).to.be.exists;
   });
 });
