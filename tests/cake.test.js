@@ -149,8 +149,7 @@ describe('Cake', function() {
     c.route('/home/:id', 'routes.hello');
     jsdom.changeURL(window, 'http://localhost/home/23?test=321');
 //    c.get('zefir').deviceWatcher();
-    c._updateWatcher();
-
+//    c._updateWatcher();
     var element = document.getElementById('rtest');
 
     expect(element.textContent).to.be.equal('hello');
@@ -227,5 +226,19 @@ describe('Cake', function() {
 
     expect(anySpy.callCount).to.be.equal(0);
     expect(homeSpy.calledOnce).to.be.true;
+  });
+
+  it('should ignore empty render', function() {
+    c.route('*', 'routes.home');
+
+    var initSpy = sinon.spy();
+
+    cake.Cream.extend({
+      _namespace : 'routes.home',
+      init : initSpy,
+      render : function() { }
+    });
+
+    expect(initSpy.calledOnce).to.be.true;
   });
 });
