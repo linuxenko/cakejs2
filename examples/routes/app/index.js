@@ -2,14 +2,13 @@
 import './index.html';
 import {h, Cream, create, inject, _container } from '../../../';
 
-create({
+var c =create({
   element : document.body,
   elementId : 'application',
   elementClass : 'cake-application'
 })
 .route('/', 'records.index')
 .route('/:id', 'records.record');
-
 
 Cream.extend({
   _namespace : 'records.data',
@@ -18,6 +17,13 @@ Cream.extend({
     { title : 'Second record', content : 'Second record content' }
   ]
 });
+
+function appWrapper(children) {
+ return ( <div>
+    <h3> Routes example </h3>
+    { children }
+  </div> );
+}
 
 Cream.extend({
   _namespace : 'records.record',
@@ -28,12 +34,16 @@ Cream.extend({
     return this.get('store.' + this.get('props.id'));
   }.property(),
 
-  render() {
+  component() {
     return ( <div>
       <strong>{ this.get('record').title }</strong>
       <p>{ this.get('record').content }</p>
       <a href="#/">back</a>
       </div> );
+  },
+
+  render() {
+    return appWrapper(this.component());
   }
 
 });
@@ -51,7 +61,7 @@ Cream.extend({
     });
   }.property(),
 
-  render() {
+  component() {
     return (
       <table className="records">
         { this.get('records').map(function(record) {
@@ -69,5 +79,8 @@ Cream.extend({
         }
       </table>
     );
+  },
+  render() {
+    return appWrapper(this.component());
   }
 });

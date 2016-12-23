@@ -71,7 +71,6 @@ https://unpkg.com/cakejs2@latest/dist/cake.min.js
   * [unregister](https://github.com/linuxenko/cakejs/blob/master/contrib/di.md)
   * [inject](https://github.com/linuxenko/cakejs/blob/master/contrib/di.md)
   * `create`
-  * `destroy`
   * `Cream`
 
 `create` options:
@@ -81,6 +80,7 @@ create({
   element      : document.body // by default
   elementClass : cake
   elementId    : cake
+  createRoot   : false        // do not create root node, use render's
 
 ```
 

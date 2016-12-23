@@ -102,6 +102,8 @@ describe('Cake', function() {
 
   it('should render from provided namespace', function() {
     var rndrSpy = sinon.spy();
+    jsdom.changeURL(window, 'http://localhost/ho/3?test=321');
+    c.get('zefir').deviceWatcher();
 
     var r = cake.Cream.extend({
       _namespace : 'routes.hello',
@@ -115,6 +117,9 @@ describe('Cake', function() {
 
     c.route('/home/:id', 'routes.hello');
     jsdom.changeURL(window, 'http://localhost/home/123?test=321');
+    c.get('zefir').deviceWatcher();
+    c.get('_loadComponent');
+    c._updateWatcher();
 
     expect(rndrSpy.calledOnce).to.be.true;
     expect(document.body.innerHTML)
@@ -125,7 +130,9 @@ describe('Cake', function() {
       .to.be.equal('<div class="cake" id="cake"><div>world</div></div>');
   });
 
-  it('shoud render nested namespace', function() {
+  it('should render nested namespace', function() {
+    jsdom.changeURL(window, 'http://localhost/home/44?test=321');
+
     var renderSpy = sinon.spy();
     var b = cake.Cream.extend({
       _namespace : 'routes.hello.nested',
@@ -143,9 +150,10 @@ describe('Cake', function() {
     });
 
     c.route('/home/:id', 'routes.hello');
-    jsdom.changeURL(window, 'http://localhost/home/23?test=321');
-//    c.get('zefir').deviceWatcher();
-//    c._updateWatcher();
+    jsdom.changeURL(window, 'http://localhost/home/3?test=321');
+    c.get('zefir').deviceWatcher();
+    c._updateWatcher();
+
     var element = document.getElementById('rtest');
 
     expect(element.textContent).to.be.equal('hello');
@@ -156,6 +164,7 @@ describe('Cake', function() {
 
     b.set('helloText', 'hello123');
     c._updateWatcher();
+    c.get('zefir').deviceWatcher();
     expect(element.textContent).to.be.equal('hello123');
     expect(renderSpy.callCount).to.be.equal(3);
   });

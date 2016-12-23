@@ -61,5 +61,28 @@ describe('Some kitchen tests', function() {
 
     expect(document.getElementById('cake')).not.be.exists;
     expect(document.getElementById('test')).to.be.exists;
+    cake.destroy();
   });
+
+  it('should handle createRoot opts with element', function() {
+    var el = document.createElement('div');
+    document.body.appendChild(el);
+
+    var c = cake.create({ createRoot: false, element : el  });
+
+    c.route('/', 'home');
+
+    cake.Cream.extend({
+      _namespace : 'home',
+      render : function() {
+        return cake.h('div', { id : 'test' }, '');
+      }
+    });
+
+    c._updateWatcher();
+
+    expect(document.getElementById('cake')).not.be.exists;
+    expect(document.getElementById('test')).to.be.exists;
+  });
+
 });

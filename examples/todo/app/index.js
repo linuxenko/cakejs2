@@ -5,8 +5,7 @@ import {h, Cream, create, _container } from '../../../';
 
 create({
   element : document.body,
-  elementId : 'todomvc',
-  elementClass : 'todomvc-application'
+  createRoot : false
 })
 .route('/', 'todomvc')
 .route('/:filter', 'todomvc');
@@ -94,12 +93,12 @@ Cream.extend({
 
   render() {
     return (
-      <section className="todoapp" onClick={ this.untoggleEditings }>
+      <section className="todoapp" >
         <header className="header">
           <h1>cakejs</h1>
           <input className="new-todo" onKeyPress={ this.insertTodo } placeholder="What needs to be done?" autofocus />
         </header>
-        <section className="main">
+        <section className="main" onClick={ this.untoggleEditings }>
           <input className="toggle-all" type="checkbox" onChange={ this.completeAll }/>
           <label for="toggle-all">Mark all as complete</label>
             <ul className="todo-list">
