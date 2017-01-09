@@ -1,6 +1,6 @@
 [![CakeJs](https://raw.githubusercontent.com/linuxenko/cakejs/master/contrib/cakejs.png)](https://github.com/linuxenko/cakejs)
 
-[![Build Status](https://img.shields.io/travis/linuxenko/cakejs.svg?style=flat-square)](https://travis-ci.org/linuxenko/cakejs) [![Coveralls](https://img.shields.io/coveralls/linuxenko/cakejs/master.svg?style=flat-square)](https://coveralls.io/github/linuxenko/cakejs) [![npm version](https://img.shields.io/npm/v/cakejs2.svg?style=flat-square)](https://www.npmjs.com/package/cakejs2) [![license](https://img.shields.io/github/license/linuxenko/cakejs.svg?style=flat-square)]() [![alpha](https://img.shields.io/badge/stability-Experimental-ff69b4.svg?style=flat-square)](https://github.com/linuxenko/cakejs)
+[![Build Status](https://img.shields.io/travis/linuxenko/cakejs2.svg?style=flat-square)](https://travis-ci.org/linuxenko/cakejs2) [![Coveralls](https://img.shields.io/coveralls/linuxenko/cakejs2/master.svg?style=flat-square)](https://coveralls.io/github/linuxenko/cakejs2) [![npm version](https://img.shields.io/npm/v/cakejs2.svg?style=flat-square)](https://www.npmjs.com/package/cakejs2) [![license](https://img.shields.io/github/license/linuxenko/cakejs2.svg?style=flat-square)]() [![alpha](https://img.shields.io/badge/stability-Experimental-ff69b4.svg?style=flat-square)](https://github.com/linuxenko/cakejs2)
 
 `CakeJS2` lightweight front-end framework with only best parts and features of most awesome frameworks.
 
@@ -66,10 +66,10 @@ https://unpkg.com/cakejs2@latest/dist/cake.min.js
 **API**
 
   * `h`
-  * [next](https://github.com/linuxenko/cakejs/blob/master/contrib/loop.md)
-  * [register](https://github.com/linuxenko/cakejs/blob/master/contrib/di.md)
-  * [unregister](https://github.com/linuxenko/cakejs/blob/master/contrib/di.md)
-  * [inject](https://github.com/linuxenko/cakejs/blob/master/contrib/di.md)
+  * [next](https://github.com/linuxenko/cakejs2/blob/master/contrib/loop.md)
+  * [register](https://github.com/linuxenko/cakejs2/blob/master/contrib/di.md)
+  * [unregister](https://github.com/linuxenko/cakejs2/blob/master/contrib/di.md)
+  * [inject](https://github.com/linuxenko/cakejs2/blob/master/contrib/di.md)
   * `create`
   * `Cream`
 
@@ -96,7 +96,7 @@ create().route(
 
 **Namespaces**
 
-[![Namespaces](https://raw.githubusercontent.com/linuxenko/cakejs/master/contrib/namespaces.png)](http://i.imgur.com/USVdVuM.gifv)
+[![Namespaces](https://raw.githubusercontent.com/linuxenko/cakejs2/master/contrib/namespaces.png)](http://i.imgur.com/USVdVuM.gifv)
 
 **Cream**
 
@@ -134,7 +134,7 @@ Sugar:
 
 `Cakejs2` is a second generation of the `cakejs` framework.
 
-First version of `cakejs` were made in 2012th and [published](https://github.com/linuxenko/cakejs/commit/ade98e2e84f56ca5b3f99b69fa30101172d30e6c) in 2014th.
+First version of `cakejs` were made in 2012th and [published](https://github.com/linuxenko/cakejs2/tree/outdated-v1) in 2014th.
 
 #### License
 
