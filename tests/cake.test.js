@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var sinon  = require('sinon');
-var h = require('basic-virtual-dom').h;
+var h = require('../').h;
 var cake = require('../');
 var c;
 
