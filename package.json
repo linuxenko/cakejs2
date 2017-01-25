@@ -1,7 +1,7 @@
 {
   "name": "cakejs2-spatial",
-  "version": "0.0.1",
-  "description": "Lightweight front-end framework with only best parts and features of most awesome frameworks.",
+  "version": "0.0.2",
+  "description": "CakeJS2 with spatial navigation.",
   "main": "index.js",
   "files": [
     "dist",
