@@ -31,7 +31,7 @@
     "lint": "eslint lib/** tests/**",
     "ci": "npm run lint && npm run mocha",
     "cov": "nyc npm run ci && nyc report --reporter=text-lcov | coveralls",
-    "prepublish": "mkdir -p dist && browserify contrib/dist.js > dist/cake.js && browserify contrib/dist.js | uglifyjs -c > dist/cake.min.js"
+    "prepublish": "mkdir -p dist && browserify --ignore-missing contrib/dist.js > dist/cake.js && browserify --ignore-missing contrib/dist.js | uglifyjs -c > dist/cake.min.js"
   },
   "repository": {
     "type": "git",
