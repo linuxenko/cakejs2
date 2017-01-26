@@ -1,6 +1,6 @@
 {
   "name": "cakejs2-spatial",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "CakeJS2 with spatial navigation.",
   "main": "index.js",
   "files": [
@@ -12,7 +12,7 @@
     "LICENSE"
   ],
   "dependencies": {
-    "spatial-virtual-dom": "0.0.3"
+    "spatial-virtual-dom": "0.0.5"
   },
   "devDependencies": {
     "browserify": "^13.1.1",
