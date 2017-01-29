@@ -43,4 +43,52 @@ describe('Zefir on top of the cake', function() {
     zefir.locationWatcher('/?t=a&b');
     expect(zefir.current.params.b).to.be.an('undefined');
   });
+
+  it('should handle non http hashbased location', function() {
+    expect(zefir).to.be.exists;
+    zefir.route('/', 'routes.home');
+    zefir.route('/posts/:tt/post', 'routes.post');
+    zefir.locationWatcher('file:///a.b/folder/index.html#/posts/123/post?test=123');
+
+
+    expect(zefir.current.params).to.be.deep.equal({ test : '123' });
+
+    zefir.locationWatcher('/?t=a&b=');
+    expect(zefir.current.params.t).to.be.equal('a');
+    expect(zefir.current.params.b).to.be.equal('');
+    zefir.locationWatcher('/?t=a&b');
+    expect(zefir.current.params.b).to.be.an('undefined');
+  });
+
+  it('should handle hashlocation without trailing hash', function() {
+    expect(zefir).to.be.exists;
+    zefir.route('/', 'routes.home');
+    zefir.route('/posts/:tt/post', 'routes.post');
+    zefir.locationWatcher('file:///a.b/folder/index.html/#/posts/123/post?test=123');
+
+
+    expect(zefir.current.params).to.be.deep.equal({ test : '123' });
+
+    zefir.locationWatcher('/?t=a&b=');
+    expect(zefir.current.params.t).to.be.equal('a');
+    expect(zefir.current.params.b).to.be.equal('');
+    zefir.locationWatcher('/?t=a&b');
+    expect(zefir.current.params.b).to.be.an('undefined');
+  });
+
+  it('should handle http nested path with hash', function() {
+    expect(zefir).to.be.exists;
+    zefir.route('/', 'routes.home');
+    zefir.route('/posts/:tt/post', 'routes.post');
+    zefir.locationWatcher('https://hello-world.com/folder-nestd/index/#/posts/123/post?test=123');
+
+
+    expect(zefir.current.params).to.be.deep.equal({ test : '123' });
+
+    zefir.locationWatcher('/?t=a&b=');
+    expect(zefir.current.params.t).to.be.equal('a');
+    expect(zefir.current.params.b).to.be.equal('');
+    zefir.locationWatcher('/?t=a&b');
+    expect(zefir.current.params.b).to.be.an('undefined');
+  });
 });
