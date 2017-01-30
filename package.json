@@ -1,6 +1,6 @@
 {
   "name": "cakejs2",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Lightweight front-end framework with only best parts and features of most awesome frameworks.",
   "main": "index.js",
   "files": [
@@ -12,7 +12,7 @@
     "LICENSE"
   ],
   "dependencies": {
-    "basic-virtual-dom": "^0.2.2"
+    "basic-virtual-dom": "^0.2.3"
   },
   "devDependencies": {
     "browserify": "^13.1.1",
