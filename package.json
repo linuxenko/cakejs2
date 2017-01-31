@@ -1,6 +1,6 @@
 {
   "name": "cakejs2-spatial",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "CakeJS2 with spatial navigation.",
   "main": "index.js",
   "files": [
