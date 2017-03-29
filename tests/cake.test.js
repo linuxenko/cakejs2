@@ -246,4 +246,23 @@ describe('Cake', function() {
 
     expect(initSpy.calledOnce).to.be.true;
   });
+
+  it('should handle injected props', function() {
+    cake.Cream.extend({
+      _namespace: 'routes.store',
+      getNum: function() {
+        return this.get('data')[1] * 2;
+      }.property(),
+      data: [ 1, 2, 3, 4]
+    });
+
+    var Component = cake.Cream.extend({
+      store: cake.inject('routes.store'),
+      test: function() {
+        return this.get('store.getNum');
+      }
+    });
+
+    expect(Component.test()).to.be.equal(4);
+  });
 });
