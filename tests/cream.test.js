@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 var Bakery = require('../');
 var Cream = Bakery.Cream;
+var h = require('../').h;
 
 describe('Cream for the cake', function() {
   afterEach(function() {
@@ -361,5 +362,21 @@ describe('Cream for the cake', function() {
     c.set('hello', '123');
     expect(b.text).to.be.a('function');
     expect(b.get('text')).to.be.equal('123');
+  });
+
+  it('should handle nested creams', function() {
+    var Nested = Cream.extend({
+      render: function() {
+        return h('div', null, this.props.name);
+      }
+    });
+
+    var Wrapper = Cream.extend({
+      render: function() {
+        return h(Nested, {name: 'prop-from-root'});
+      }
+    });
+
+    expect(Wrapper.render().children[0].children).to.be.equal('prop-from-root');
   });
 });
