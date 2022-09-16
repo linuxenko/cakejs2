@@ -1,14 +1,14 @@
-**Dependency mangement engine**
+**Dependency Management**
 
-Every registered object placed into `_container` with appropriate namespace.
-There is ways to place `Cream` into container :
+Every registered object has its own `_container` and namespace.
+How to place `Cream` into `container`:
 
-  * First is specifying `_namespace` property insode of the object.
-  * With `register` function, for an instance `register('routes.home', homeCream)`.
+  * By specifying `_namespace` property inside of an object.
+  * Using `register` function, for example: `register('routes.home', homeCream)`.
 
-Sometimes objects became depend on another objects inside, there is `_after` option
-for cream that helps exactly specify `after` what register object as well as third 
-argument for `register` function, for an instance:
+To manage dependencies priority, the `_after` option could be used:
+
+Using an appropriate argument list for `register()` function:
 
 ```js
 var Home = Cream.extend({});
@@ -17,7 +17,7 @@ register('routes.home', Home, 'mystore');
 
 ```
 
-or simple:
+or just explicitly specifying using the `_after` keyword inside of a `Cream`:
 
 ```js
 Cream.extend({
@@ -27,9 +27,9 @@ Cream.extend({
 
 ```
 
-**Injection**
+**Dependency Injection**
 
-Any registered object or its property can be easily inject with function `inject` for an instance:
+Any registered object or its property can be easily injected using `inject` function:
 
 ```js
   Cream.extend({

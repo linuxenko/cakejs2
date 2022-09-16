@@ -1,6 +1,6 @@
 {
   "name": "cakejs2",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "description": "Lightweight front-end framework with only best parts and features of most awesome frameworks.",
   "main": "index.js",
   "files": [
@@ -11,9 +11,6 @@
     "README.md",
     "LICENSE"
   ],
-  "dependencies": {
-    "basic-virtual-dom": "^0.3.1"
-  },
   "devDependencies": {
     "browserify": "^13.1.1",
     "chai": "^3.5.0",
@@ -38,7 +35,7 @@
     "url": "git+https://github.com/linuxenko/cakejs2.git"
   },
   "keywords": [],
-  "author": "Svetlana Linuxenko <linuxenko@yahoo.com> (http://www.linuxenko.pro)",
+  "author": "Svetlana Linuxenko",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/linuxenko/cakejs2/issues"

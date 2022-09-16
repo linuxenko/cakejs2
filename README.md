@@ -1,10 +1,14 @@
-[![CakeJs](https://raw.githubusercontent.com/linuxenko/cakejs/master/contrib/cakejs.png)](https://github.com/linuxenko/cakejs)
+[![CakeJs](https://notabug.org/hofuku/cakejs2/raw/master/contrib/cakejs.png)](https://notabug.org/hofuku/cakejs2/raw/master/contrib/cakejs.png)
 
-[![Donate](https://img.shields.io/badge/donate-3$-green.svg?style=flat-square)](https://www.linuxenko.pro/donate.html#?amount=3) [![Build Status](https://img.shields.io/travis/linuxenko/cakejs2.svg?style=flat-square)](https://travis-ci.org/linuxenko/cakejs2) [![Coveralls](https://img.shields.io/coveralls/linuxenko/cakejs2/master.svg?style=flat-square)](https://coveralls.io/github/linuxenko/cakejs2) [![npm version](https://img.shields.io/npm/v/cakejs2.svg?style=flat-square)](https://www.npmjs.com/package/cakejs2) [![license](https://img.shields.io/github/license/linuxenko/cakejs2.svg?style=flat-square)]() [![alpha](https://img.shields.io/badge/stability-Experimental-ff69b4.svg?style=flat-square)](https://github.com/linuxenko/cakejs2)
+`CakeJS2` is a lightweight front-end framework which borrows most awesome features from others.
 
-`CakeJS2` lightweight front-end framework with only best parts and features of most awesome frameworks.
+###  New features
 
-#### Features
+  * Virtual-dom merged into a source tree
+  * No dependencies
+  * SVG support (partial)
+
+### Features
 
   * All in one
   * [Dependency management](./contrib/di.md)
@@ -14,9 +18,9 @@
   * Small error stack trace (?)
   * Small size and codebase ([about 23kb](https://unpkg.com/cakejs2@latest/dist/cake.min.js))
   * ES5 support (Yeah!)
-  * Very easy to learn
+  * Extremely easy to learn
 
-**Candle counter recipe:**
+**For example: a candle counter recipe:**
 
 ```js
 create().route('/', 'counter');
@@ -36,13 +40,13 @@ Cream.extend({
 });
 ```
 
-To enable `JSX` support, transpiler option have to be provided that names defaults with `h` (hyperscript) instead of react:
+Hyperscript is an requirement:
 
 ```
 /** @jsx h */
 ```
 
-**Examples**
+**More examples**
 
 Live demos:
 
@@ -53,12 +57,17 @@ Check out [examples](./examples) folder.
 
 **Installation**
 
+To install latest version, the repository archive could be used:
+
 ```
-npm install cakejs2
+https://notabug.org/hofuku/cakejs2/archive/master.zip
 ```
 
 CDN
 
+None yet
+
+Deprecated:
 ```
 https://unpkg.com/cakejs2@latest/dist/cake.min.js
 ```
@@ -66,10 +75,10 @@ https://unpkg.com/cakejs2@latest/dist/cake.min.js
 **API**
 
   * `h`
-  * [next](https://github.com/linuxenko/cakejs2/blob/master/contrib/loop.md)
-  * [register](https://github.com/linuxenko/cakejs2/blob/master/contrib/di.md)
-  * [unregister](https://github.com/linuxenko/cakejs2/blob/master/contrib/di.md)
-  * [inject](https://github.com/linuxenko/cakejs2/blob/master/contrib/di.md)
+  * [next](/contrib/loop.md)
+  * [register](/contrib/di.md)
+  * [unregister](/contrib/di.md)
+  * [inject](/contrib/di.md)
   * `create`
   * `Cream`
 
@@ -98,9 +107,7 @@ create().route(
 
 [![Namespaces](https://raw.githubusercontent.com/linuxenko/cakejs2/master/contrib/namespaces.png)](http://i.imgur.com/USVdVuM.gifv)
 
-**Cream**
-
-Base component of any cake.
+*Cream* is a base component of a cake.
 
 Functions:
 
@@ -132,12 +139,13 @@ Sugar:
 
 #### History
 
-`Cakejs2` is a second generation of the `cakejs` framework.
-
-First version of `cakejs` were made in 2012th and [published](https://github.com/linuxenko/cakejs2/tree/outdated-v1) in 2014th.
+  * [2022] Forked to became a general development version for now. [notabug](https://notabug.org/hofuku/cakejs2)
+  * [2016] `Cakejs2` is a second generation of the `cakejs` framework [origin](https://githubg.com/linuxenko/cakejs2)
+  * [2012] First version of `cakejs` were made and [published](https://github.com/linuxenko/cakejs2/tree/outdated-v1) in 2014th.
 
 #### License
 
 MIT License
 
 Copyright (c) 2016 Svetlana Linuxenko
+
